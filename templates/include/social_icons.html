@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<div style="margin:25px 0 5px;">
+  {% if account.facebook %}
+    <a href="{{ account.facebook }}" target="_blank">
+      <img class="img-circle"
+           style="border: none;max-width:20px;"
+           src="{% static 'images/facebook-icon.png' %}"
+           alt="" />
+    </a>
+  {% endif %}
+
+  {% if account.linkedin %}
+    <a href="{{ account.linkedin }}" target="_blank">
+      <img class="img-circle"
+           style="border: none;max-width:20px;"
+           src="{% static 'images/linkedin-oauth2-icon.png' %}"
+           alt="" />
+    </a>
+  {% endif %}
+
+  {% if account.odnoklassniki %}
+    <a href="{{ account.odnoklassniki }}" target="_blank">
+      <img class="img-circle"
+           style="border: none;max-width:20px;"
+           src="{% static 'images/odnoklassniki-oauth2-icon.png' %}"
+           alt="" />
+    </a>
+  {% endif %}
+
+  {% if account.vkontakte %}
+    <a href="{{ account.vkontakte }}" target="_blank">
+      <img class="img-circle"
+           style="border: none;max-width:20px;"
+           src="{% static 'images/vk-oauth2-icon.png' %}"
+           alt="" />
+    </a>
+  {% endif %}
+
+  {% if account.skype %}
+    <a href="skype:{{ account.skype }}?call" target="_blank">
+      <img class="img-circle"
+           style="border: none;max-width:23px;"
+           src="{% static 'images/skype-icon.png' %}"
+           alt="" />
+    </a>
+  {% endif %}
+</div>

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+      <ul class="nav nav-pills">
+        <li role="presentation" {% block settings_profile_active %}{% endblock %}>
+          <a href="{% url 'account:profile-settings' %}">Профиль</a>
+        </li>
+        <li role="presentation" {% block settings_email_active %}{% endblock %}>
+          <a href="{% url 'account:email-settings' %}">Почта</a>
+        </li>
+        <li role="presentation" {% block settings_password_active %}{% endblock %}>
+          <a href="{% url 'account:password-settings' %}">Пароль</a>
+        </li>
+      </ul>
+    <div class="panel-body" style="padding: 15px 0;">
+        {% block settings_content %}
+        {% endblock %}
+    </div>
+{% endblock content %}

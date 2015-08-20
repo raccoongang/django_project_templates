@@ -1,0 +1,18 @@
+{% load staticfiles%}
+{% load thumbnail %}
+
+<div class="col-sm-12">
+
+  <a href="{% url 'account:profile'  follower.id %}">
+
+    {% if follower.avatar %}
+      {%  thumbnail follower.avatar "50x50" crop="center" as im %}
+        <img src="{{ im.url }}" alt="" class="img-circle" style="max-width:50px;margin: 0 0 10px;">
+      {% endthumbnail %}
+    {% else %}
+      <img src="{% static 'images/default_user.jpg'%}" alt="..." class="img-circle" style="max-width:50px;margin: 0 0 10px;">
+    {% endif %}
+
+    {{ follower.full_name }}
+  </a>
+</div>

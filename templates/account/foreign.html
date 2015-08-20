@@ -1,0 +1,14 @@
+{% extends 'account/foreign_main.html' %}
+
+{% load staticfiles %}
+
+
+{% block foreign_content %}
+  <div class="thumbnail" style="overflow: hidden;">
+  <a href="#" class="btn prev_page" style="float:left;"><img src="{% static 'images/icons/prev.png' %}" alt=""
+                                            style="width:20px;float:left;margin-right: 5px;"/> назад</a>
+  <h4>{{ account.full_name }} - личный кабинет</h4>
+  </div>
+
+{% endblock foreign_content %}
+

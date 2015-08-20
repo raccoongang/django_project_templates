@@ -1,0 +1,82 @@
+{% load staticfiles %}
+<form data-form-login class="form-horizontal" method="post" action="{% url 'account:login' %}">
+  {% csrf_token %}
+    {{ form.non_field_errors }}
+
+  <div class="form-group">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-9">
+      {% if form.username.errors %}
+        <ul style="margin:0; padding:0;">
+        {% for error in form.username.errors %}
+          <li class="text-danger" style="list-style: none;">{{ error|escape }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <label for="{{ form.username.id_for_label }}" class="col-sm-3 control-label">Никнейм</label>
+    <div class="col-sm-9">
+      <input type="text"
+             class="form-control required"
+             id="{{ form.username.id_for_label }}"
+             name="{{ form.username.html_name }}"
+             placeholder="Никнейм"
+             maxlength="{{ form.username.field.max_length }}"
+             value="{% if form.username.value %}{{ form.username.value }}{% endif %}" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-9">
+      {% if form.password.errors %}
+        <ul style="margin:0; padding:0;">
+        {% for error in form.password.errors %}
+          <li class="text-danger" style="list-style: none;">{{ error|escape }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <label for="{{ form.password.id_for_label }}" class="col-sm-3 control-label">Пароль</label>
+    <div class="col-sm-9">
+      <input type="password"
+             class="form-control required"
+             id="{{ form.password.id_for_label }}"
+             name="{{ form.password.html_name }}"
+             placeholder="Пароль"
+             value="{% if form.password.value %}{{ form.password.value }}{% endif %}" />
+    </div>
+  </div>
+
+  <input type="submit" class="hidden"/>
+
+  <div class="form-group">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-9">Есть аккаунт, но <a href="{% url 'password_reset' %}">забыли пароль</a>?</div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3 text-right">
+      <p><strong>Вход через</strong></p>
+    </div>
+
+    <div class="col-sm-9">
+      <div class="col-sm-5">
+        <a data-social-url class="custom_img-thumbnail_link" href="{% url 'social:begin' 'facebook' %}">
+          <img class="img-thumbnail custom_img-thumbnail" src="{% static 'images/button/facebook_in.png' %}" alt=""/>
+        </a>
+        <a data-social-url class="custom_img-thumbnail_link" href="{% url 'social:begin' 'odnoklassniki-oauth2' %}">
+          <img class="img-thumbnail custom_img-thumbnail" src="{% static 'images/button/Odnoklassniki_in.png' %}" alt=""/>
+        </a>
+      </div>
+      <div calss="col-sm-5">
+        <a data-social-url class="custom_img-thumbnail_link" href="{% url 'social:begin' 'vk-oauth2' %}">
+          <img class="img-thumbnail custom_img-thumbnail" src="{% static 'images/button/vkontakte_in.png' %}" alt=""/>
+        </a>
+        <a data-social-url class="custom_img-thumbnail_link" href="{% url 'social:begin' 'linkedin-oauth2' %}">
+          <img class="img-thumbnail custom_img-thumbnail" src="{% static 'images/button/Linkedin_in.png' %}" alt=""/>
+        </a>
+      </div>
+    </div>
+  </div>
+</form>

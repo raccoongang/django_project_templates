@@ -1,0 +1,10 @@
+<div class="col-sm-3"></div>
+<div class="col-sm-9">
+  {% if field.errors %}
+    <ul style="margin:0; padding:0;">
+    {% for error in field.errors %}
+      <li class="text-danger" style="list-style: none;">{{ error|escape }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+</div>

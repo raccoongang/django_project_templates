@@ -1,0 +1,17 @@
+{% load staticfiles%}
+
+<div id="accordion_user" role="tablist" aria-multiselectable="true">
+  <div>
+        <a role="button" data-toggle="collapse" data-parent="#accordion_user" href="#list1"
+           aria-expanded="true" aria-controls="categories1" style="font-size:12px;color:black;">
+          Больше информации
+        </a>
+    <div id="list1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      {% if account.country %}<p>Страна: {{ account.country }}</p>{% endif %}
+      {% if account.city %}<p>Город: {{ account.city }}</p>{% endif %}
+      {% if account.university %}<p>ВУЗ: {{ account.university }}</p>{% endif %}
+      {% if account.education_level %}<p>Ученая степень: {{ account.education_level }}</p>{% endif %}
+      {% if account.bdate %}<p>День рождения: {{ account.bdate }}</p>{% endif %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+{% extends 'account/base_settings.html' %}
+
+{% block settings_email_active %}class="active"{% endblock %}
+
+{% block settings_content %}
+
+  <form method="post" class="form-horizontal">
+    {% csrf_token %}
+    <div class="form-group">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6 text-info">
+        Действующая почта — {{ user.email }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+        {% if form.email.errors %}
+          <ul style="margin:0; padding:0;">
+          {% for error in form.email.errors %}
+            <li class="text-danger" style="list-style: none;">{{ error|escape }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="{{ form.email.id_for_label }}" class="col-sm-3 control-label">Новая почта</label>
+      <div class="col-sm-6">
+        <input type="text"
+               class="form-control required"
+               id="{{ form.email.id_for_label }}"
+               name="{{ form.email.html_name }}"
+               placeholder="Новая почта"
+               value="{% if form.email.value %}{{ form.email.value }}{% endif %}" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+          <div class="text-info">
+            Мы вышлем письмо с подтверждением
+          </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+        {% if form.password.errors %}
+          <ul style="margin:0; padding:0;">
+          {% for error in form.password.errors %}
+            <li class="text-danger" style="list-style: none;">{{ error|escape }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="{{ form.password.id_for_label }}" class="col-sm-3 control-label">Ваш пароль</label>
+      <div class="col-sm-6">
+        <input type="password"
+               class="form-control required"
+               id="{{ form.password.id_for_label }}"
+               name="{{ form.password.html_name }}"
+               placeholder="Ваш пароль"
+               value="{% if form.password.value %}{{ form.password.value }}{% endif %}" />
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-9">
+        <input type="submit" class="btn btn-primary" value="Сохранить"/>
+      </div>
+    </div>
+  </form>
+{% endblock %}

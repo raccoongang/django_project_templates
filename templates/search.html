@@ -1,0 +1,25 @@
+{% extends 'account/profile_main.html' %}
+{% block active_search %}class="active"{% endblock %}
+
+{% block profile_content %}
+  <h4>Результаты поиска</h4>
+  <div class="panel-body">
+    <div style="margin:0 auto;max-width:770px;overflow: hidden;">
+      <button type="checkbox" class="cust_button">Все результаты</button>
+      <button type="checkbox" class="cust_button">Популярные</button>
+      <button type="checkbox" class="cust_button">Дисциплины</button>
+      <button type="checkbox" class="cust_button">Видео</button>
+      <button type="checkbox" class="cust_button">Аудио</button>
+      <button type="checkbox" class="cust_button">МООС</button>
+      <button type="checkbox" class="cust_button">Статьи</button>
+      <button type="checkbox" class="cust_button">Книги</button>
+      <button type="checkbox" class="cust_button">События</button>
+      <button type="checkbox" class="cust_button">Пользователи</button>
+    </div>
+  </div>
+  {% include 'block_for_search.html' %}
+  {% include 'block_for_search_audio.html' %}
+  {% include 'block_for_search_video.html' %}
+  {% include 'block_for_search.html' %}
+  {% include 'block_for_search_video.html' %}
+{% endblock %}
