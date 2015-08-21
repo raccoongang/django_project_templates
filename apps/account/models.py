@@ -19,8 +19,6 @@ class Account(AbstractUser):
     vkontakte = models.URLField(blank=True, null=True)
     linkedin = models.URLField(blank=True, null=True)
     odnoklassniki = models.URLField(blank=True, null=True)
-    university = models.CharField(max_length=255, blank=True, null=True)
-    education_level = models.CharField(max_length=255, blank=True, null=True)
 
     def __unicode__(self):
         return u'{}'.format(self.username)
@@ -32,7 +30,7 @@ class Account(AbstractUser):
         return self.get_username()
 
     def is_info(self):
-        info = self.country or self.city or self.university or self.education_level or self.bdate
+        info = self.country or self.city or self.bdate
         return info
 
     def followers_count(self):

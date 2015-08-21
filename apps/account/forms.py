@@ -11,8 +11,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Account
-        fields = ['username', 'last_name', 'first_name', 'my_site', 'description', 'skype', 'city', 'country',
-                  'university', 'education_level', 'bdate', 'avatar']
+        fields = ['username', 'last_name', 'first_name', 'my_site', 'description', 'skype', 'city', 'country', 'bdate', 'avatar']
 
 class EmailChangeForm(forms.Form):
 

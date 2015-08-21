@@ -12,7 +12,6 @@ urlpatterns = [
     url(r'^settings/email/$', views.EmailSettingsView.as_view(), name='email-settings'),
     url(r'^settings/email/verify/(?P<verification_key>\w+)/$', views.EmailVerifyView.as_view(), name='email-verify'),
     url(r'^settings/password/$', views.password_change, name='password-settings'),
-    url(r'^profile/(?P<pk>\d+)/$', views.ForeignPageView.as_view(), name='profile'),
     url(r'^require_email/(?P<backend>[^/]+)/$', views.RequireEmailView.as_view(), name='require_email'),
     url(r'^email_sent/$', views.EmailSentView.as_view(), name='email-sent'),
 ]

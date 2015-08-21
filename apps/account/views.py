@@ -116,10 +116,6 @@ def password_change(request,
     return TemplateResponse(request, template_name, context)
 
 
-class ForeignPageView(LoginRequiredMixin, DetailView):
-    model = Account
-    context_object_name = 'account'
-    template_name = 'account/foreign.html'
 
 
 
