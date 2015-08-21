@@ -1,0 +1,278 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-21 16:20+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/account/forms.py:30
+msgid "New and current email addresses should not overlap"
+msgstr ""
+
+#: apps/account/forms.py:38
+msgid "Incorrect password"
+msgstr ""
+
+#: apps/account/views.py:108
+msgid "Password has been changed"
+msgstr ""
+
+#: apps/account/views.py:136
+msgid "Profile has been saved"
+msgstr ""
+
+#: apps/account/views.py:182
+msgid "Check you email"
+msgstr ""
+
+#: apps/account/views.py:200
+#, python-brace-format
+msgid "Email successfuly changed to {0}."
+msgstr ""
+
+#: apps/account/views.py:207
+msgid "You have activate your account"
+msgstr ""
+
+#: templates/account/base_settings.html:8
+msgid "Profile"
+msgstr ""
+
+#: templates/account/base_settings.html:11
+#: templates/account/require_email.html:13
+#: templates/account/require_email.html:19
+#: templates/registration/registration_form.html:43
+#: templates/registration/registration_form.html:49
+msgid "Email"
+msgstr ""
+
+#: templates/account/base_settings.html:15
+#: templates/registration/login.html:49 templates/registration/login.html:56
+#: templates/registration/registration_form.html:74
+#: templates/registration/registration_form.html:80
+msgid "Password"
+msgstr ""
+
+#: templates/account/email_sent.html:10
+msgid "Follow by link from email for email confirmation"
+msgstr ""
+
+#: templates/account/email_settings.html:12
+msgid "Current email"
+msgstr ""
+
+#: templates/account/email_settings.html:30
+#: templates/account/email_settings.html:36
+msgid "New email"
+msgstr ""
+
+#: templates/account/email_settings.html:44
+msgid "We will send you mail with confirmation"
+msgstr ""
+
+#: templates/account/email_settings.html:63
+#: templates/account/email_settings.html:69
+msgid "Your password"
+msgstr ""
+
+#: templates/account/email_settings.html:79
+#: templates/account/password_settings.html:91
+#: templates/account/profile_settings.html:274
+#: templates/account/require_email.html:27
+msgid "Save"
+msgstr ""
+
+#: templates/account/modals/delete_user.html:14
+msgid "Do you realy want to delete"
+msgstr ""
+
+#: templates/account/modals/delete_user.html:22
+msgid "Cancel"
+msgstr ""
+
+#: templates/account/modals/delete_user.html:23
+msgid "Delete"
+msgstr ""
+
+#: templates/account/modals/login_modal.html:8
+#: templates/account/modals/login_modal.html:17 templates/base.html:87
+msgid "Sign In"
+msgstr ""
+
+#: templates/account/modals/login_modal.html:16
+#: templates/account/modals/register_modal.html:23
+msgid "Close"
+msgstr ""
+
+#: templates/account/modals/register_modal.html:11
+msgid "Registration"
+msgstr ""
+
+#: templates/account/modals/register_modal.html:25 templates/base.html:84
+msgid "Sign Up"
+msgstr ""
+
+#: templates/account/profile_main.html:21 templates/base.html:68
+msgid "Profile Settings"
+msgstr ""
+
+#: templates/account/profile_main.html:45
+#: templates/account/profile_main.html:48
+msgid "Search"
+msgstr ""
+
+#: templates/account/profile_settings.html:43
+#: templates/account/profile_settings.html:332
+msgid "Change photo"
+msgstr ""
+
+#: templates/account/profile_settings.html:62
+#: templates/account/profile_settings.html:68
+#: templates/registration/login.html:21 templates/registration/login.html:28
+#: templates/registration/registration_form.html:18
+#: templates/registration/registration_form.html:24
+msgid "Nickname"
+msgstr ""
+
+#: templates/account/profile_settings.html:88
+#: templates/account/profile_settings.html:94
+msgid "Name"
+msgstr ""
+
+#: templates/account/profile_settings.html:113
+#: templates/account/profile_settings.html:119
+msgid "Surname"
+msgstr ""
+
+#: templates/account/profile_settings.html:138
+#: templates/account/profile_settings.html:146
+msgid "Birthdate"
+msgstr ""
+
+#: templates/account/profile_settings.html:169
+#: templates/account/profile_settings.html:175
+msgid "Site"
+msgstr ""
+
+#: templates/account/profile_settings.html:194
+msgid "About me"
+msgstr ""
+
+#: templates/account/profile_settings.html:238
+msgid "Country"
+msgstr ""
+
+#: templates/account/profile_settings.html:261
+msgid "City"
+msgstr ""
+
+#: templates/account/profile_settings.html:281
+msgid "Link Accounts"
+msgstr ""
+
+#: templates/account/require_email.html:8
+msgid "Email is required"
+msgstr ""
+
+#: templates/base.html:43 templates/base.html.py:64
+msgid "Personal Area"
+msgstr ""
+
+#: templates/base.html:73
+msgid "Logout"
+msgstr ""
+
+#: templates/registration/activation_complete.html:7
+msgid "Your account successfuly activated"
+msgstr ""
+
+#: templates/registration/activation_email.txt:3
+#, python-format
+msgid ""
+"You have registrated on %(site.name)s. Follow by link http://%(site.domain)s"
+"%(link)s for account activation\" "
+msgstr ""
+
+#: templates/registration/activation_email_subject.txt:2
+msgid "Email confirmation"
+msgstr ""
+
+#: templates/registration/login.html:66
+msgid "I have an account, but I have "
+msgstr ""
+
+#: templates/registration/login.html:68
+msgid "forgot a password"
+msgstr ""
+
+#: templates/registration/login.html:75
+msgid "Sign In With"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:8
+msgid "Password recovery is complete"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:10
+msgid "Your password has beed saved. Sign In now."
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:8
+msgid "New password"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:10
+msgid "Please, enter new password twice for confirmation"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:62
+msgid "Change the passwrod"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:8
+msgid "Mail with recovery instruction has been sent"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:10
+msgid "We have sent instuction for password recovery on your email."
+msgstr ""
+
+#: templates/registration/password_reset_form.html:8
+msgid "Password recovery"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:10
+msgid ""
+"Did you forget the password? Enter you email address and we will send you "
+"password recovery instruction"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:41
+msgid "Send"
+msgstr ""
+
+#: templates/registration/registration_complete.html:2
+msgid ""
+"Registration successfuly finished. Check you email for account actiavation"
+msgstr ""
+
+#: templates/registration/registration_form.html:98
+#: templates/registration/registration_form.html:104
+msgid "Confirm Password"
+msgstr ""
+
+#: templates/registration/registration_form.html:113
+msgid "Sign Up With"
+msgstr ""

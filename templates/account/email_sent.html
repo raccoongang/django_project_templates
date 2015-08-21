@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block active_home %}class="active"{% endblock %}
 
 {% block content %}
@@ -6,7 +7,7 @@
     <div class="container">
       <h3>Проверьте почту.</h3>
       <div class="text-info">
-        Для завершение проверки подлинности, перейдите по ссылке отправленной в письме.
+          {% trans "Follow by link from email for email confirmation" %}
       </div>
     </div>
   </div>

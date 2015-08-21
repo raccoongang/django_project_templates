@@ -1,6 +1,5 @@
-# -*- coding: utf8 -*-
-import json
 from django.conf import settings
+from django.utils.translation import ungettext, ugettext_lazy as _
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.hashers import is_password_usable
 from django.contrib.sites.models import Site
@@ -106,7 +105,7 @@ def password_change(request,
             # django.contrib.auth.middleware.SessionAuthenticationMiddleware
             # is enabled.
             update_session_auth_hash(request, form.user)
-            messages.success(request, u'Пароль изменен.')
+            messages.success(request, _("Password has been changed"))
             return HttpResponseRedirect(post_change_redirect)
     else:
         form = password_change_form(user=request.user)
@@ -134,7 +133,7 @@ class ProfileSettingsView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         super_valid = super(ProfileSettingsView, self).form_valid(form)
-        messages.success(self.request, u'Профиль сохранен.')
+        messages.success(self.request, _("Profile has been saved"))
         return super_valid
 
     def get_context_data(self, **kwargs):
@@ -176,10 +175,11 @@ class EmailSettingsView(LoginRequiredMixin, FormView):
             'site': current_site,
             'verification_key': email_change.verification_key,
         }
-        subject = render_to_string('send_mail/activation_email_subject.txt')
-        message = render_to_string('send_mail/activation_email.txt', context=context)
+        subject = render_to_string('send_mail/activation_email_subject.html')
+        message = render_to_string('send_mail/activation_email.html',
+                                   context=context)
         send_mail(subject, message, None, [email_change.email])
-        messages.success(self.request, u'Проверьте свою почту.')
+        messages.success(self.request, _("Check you email"))
 
 
 class EmailVerifyView(LoginRequiredMixin, RedirectView):
@@ -197,14 +197,14 @@ class EmailVerifyView(LoginRequiredMixin, RedirectView):
         request.user.email = email_change.email
         request.user.save()
         email_change.delete()
-        messages.success(self.request, u'Почта успешно изменена на {}.'.format(request.user.email))
+        messages.success(self.request, _('Email successfuly changed to {0}.').format(request.user.email))
         return get_redirect
 
 
 class CustomActivationView(ActivationView):
 
     def get_success_url(self, request, user):
-        messages.success(request, u"Вы активировали свой аккаунт")
+        messages.success(request,_("You have activate your account"))
         return ('account:profile-settings', (), {})
 
 

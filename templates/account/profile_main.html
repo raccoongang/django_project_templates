@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% load staticfiles %}
-
+{% load i18n %}
 {% block content %}
   <div class="row custom-row">
     <div class="col-sm-3 panel panel-default" style="padding:5px;">
@@ -17,7 +17,8 @@
         <div class="wrapper_block" style="padding:5px;">
           <p>
             <a href="{% url 'account:profile-settings' %}">
-              <span class="glyphicon glyphicon-wrench"></span> Настройки
+              <span class="glyphicon glyphicon-wrench"></span>
+                {% trans "Profile Settings" %}
             </a>
           </p>
         </div>
@@ -41,9 +42,10 @@
           <div class="form-group">
 {#                  <input type="text" class="form-control" placeholder="search">#}
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Поиск">
+              <input type="text" class="form-control" placeholder="{% trans "Search" %}">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Искать</button>
+                <button class="btn btn-default" type="button">
+                    {% trans "Search" %}</button>
               </span>
             </div>
 

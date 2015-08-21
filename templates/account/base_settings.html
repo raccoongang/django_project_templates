@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-
+{% load i18n %}
 {% block content %}
       <ul class="nav nav-pills">
         <li role="presentation" {% block settings_profile_active %}{% endblock %}>
-          <a href="{% url 'account:profile-settings' %}">Профиль</a>
+          <a href="{% url 'account:profile-settings' %}">
+              {% trans "Profile" %}</a>
         </li>
         <li role="presentation" {% block settings_email_active %}{% endblock %}>
-          <a href="{% url 'account:email-settings' %}">Почта</a>
+          <a href="{% url 'account:email-settings' %}">{% trans "Email" %}</a>
         </li>
         <li role="presentation" {% block settings_password_active %}{% endblock %}>
-          <a href="{% url 'account:password-settings' %}">Пароль</a>
+          <a href="{% url 'account:password-settings' %}">
+              {% trans "Password" %}</a>
         </li>
       </ul>
     <div class="panel-body" style="padding: 15px 0;">

@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load i18n %}
 <form data-form-registration class="form-horizontal" method="post" action="{% url 'registration_register' %}">
   {% csrf_token %}
 
@@ -13,13 +14,14 @@
         </ul>
       {% endif %}
     </div>
-    <label for="{{ form.username.id_for_label }}" class="col-sm-3 control-label">Никнейм</label>
+    <label for="{{ form.username.id_for_label }}" class="col-sm-3
+    control-label">{% trans "Nickname" %}</label>
     <div class="col-sm-9">
       <input type="text"
              class="form-control required"
              id="{{ form.username.id_for_label }}"
              name="{{ form.username.html_name }}"
-             placeholder="Никнейм"
+             placeholder="{% trans "Nickname" %}"
              maxlength="{{ form.username.field.max_length }}"
              value="{% if form.username.value %}{{ form.username.value }}{% endif %}" />
     </div>
@@ -37,13 +39,14 @@
         {% endif %}
     </div>
 
-    <label for="{{ form.email.id_for_label }}" class="col-sm-3 control-label">Почта</label>
+    <label for="{{ form.email.id_for_label }}" class="col-sm-3
+    control-label">{% trans "Email" %}</label>
     <div class="col-sm-9">
             <input type="email"
              class="form-control required"
              id="{{ form.email.id_for_label }}"
              name="{{ form.email.html_name }}"
-             placeholder="Почта"
+             placeholder="{% trans "Email" %}"
              value="{% if form.email.value %}{{ form.email.value }}{% endif %}" />
     </div>
   </div>
@@ -67,13 +70,14 @@
       {% endif %}
     </div>
 
-    <label for="{{ form.password1.id_for_label }}" class="col-sm-3 control-label">Пароль</label>
+    <label for="{{ form.password1.id_for_label }}" class="col-sm-3
+    control-label">{% trans "Password" %}</label>
     <div class="col-sm-9">
       <input type="password"
              class="form-control required"
              id="{{ form.password1.id_for_label }}"
              name="{{ form.password1.html_name }}"
-             placeholder="Пароль"
+             placeholder="{% trans "Password" %}"
              value="{% if form.password1.value %}{{ form.password1.value }}{% endif %}" />
     </div>
   </div>
@@ -90,13 +94,14 @@
     {% endif %}
     </div>
 
-    <label for="{{ form.password2.id_for_label }}" class="col-sm-3 control-label">Пароль (еще раз)</label>
+    <label for="{{ form.password2.id_for_label }}" class="col-sm-3
+    control-label">{% trans "Confirm Password" %}</label>
     <div class="col-sm-9">
       <input type="password"
              class="form-control required"
              id="{{ form.password2.id_for_label }}"
              name="{{ form.password2.html_name }}"
-             placeholder="Пароль (еще раз)"
+             placeholder="{% trans "Confirm Password" %}"
              value="{% if form.password2.value %}{{ form.password2.value }}{% endif %}" />
     </div>
   </div>
@@ -105,7 +110,7 @@
 
   <div class="row">
     <div class="col-sm-3 text-right">
-      <p><strong>Быстрая регистрация</strong></p>
+      <p><strong>{% trans "Sign Up With" %}</strong></p>
     </div>
 
     <div class="col-sm-9">

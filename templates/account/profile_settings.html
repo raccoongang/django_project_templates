@@ -1,6 +1,7 @@
 {% extends 'account/base_settings.html' %}
 
 {% load staticfiles %}
+{% load i18n %}
 {% load backend_utils %}
 
 {% block settings_profile_active %}class="active"{% endblock %}
@@ -38,7 +39,8 @@
                    id="{{ form.avatar.id_for_label }}"
                    name="{{ form.avatar.html_name }}" />
             <img data-profile-img class="g-avatar" src="{% if account.avatar %}{{ account.avatar.url }}{% else %}{% static 'images/avatar.jpeg' %}{% endif %}" width="100" height="100" alt="">
-            <label for="{{ form.avatar.id_for_label }}" style="cursor: pointer" class="control-label">Поменять фото</label>
+            <label for="{{ form.avatar.id_for_label }}" style="cursor: pointer"
+                   class="control-label">{% trans "Change photo" %}</label>
           </div>
         </div>
       </div>
@@ -56,39 +58,16 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="{{ form.username.id_for_label }}" class="col-sm-2 control-label">Никнейм</label>
+        <label for="{{ form.username.id_for_label }}" class="col-sm-2
+        control-label">{% trans "Nickname" %}</label>
         <div class="col-sm-9">
           <input type="text"
                  class="form-control required"
                  id="{{ form.username.id_for_label }}"
                  name="{{ form.username.html_name }}"
-                 placeholder="Никнейм"
+                 placeholder="{% trans "Nickname" %}"
                  maxlength="{{ form.username.field.max_length }}"
                  value="{% if form.username.value %}{{ form.username.value }}{% endif %}" />
-        </div>
-      </div>
-
-      <div class="form-group">
-          <div class="col-sm-2"></div>
-          <div class="col-sm-9">
-            {% if form.last_name.errors %}
-              <ul style="margin:0; padding:0;">
-              {% for error in form.last_name.errors %}
-                <li class="text-danger" style="list-style: none;">{{ error|escape }}</li>
-              {% endfor %}
-              </ul>
-            {% endif %}
-          </div>
-      </div>
-      <div class="form-group">
-        <label for="{{ form.last_name.id_for_label }}" class="col-sm-2 control-label">Фамилия</label>
-        <div class="col-sm-9">
-          <input type="text"
-                 class="form-control required"
-                 id="{{ form.last_name.id_for_label }}"
-                 name="{{ form.last_name.html_name }}"
-                 placeholder="Фамилия"
-                 value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}" />
         </div>
       </div>
 
@@ -105,14 +84,40 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="{{ form.first_name.id_for_label }}" class="col-sm-2 control-label">Имя</label>
+        <label for="{{ form.first_name.id_for_label }}" class="col-sm-2
+        control-label">{% trans "Name" %}</label>
         <div class="col-sm-9">
           <input type="text"
                  class="form-control required"
                  id="{{ form.first_name.id_for_label }}"
                  name="{{ form.first_name.html_name }}"
-                 placeholder="Имя"
+                 placeholder="{% trans "Name" %}"
                  value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}" />
+        </div>
+      </div>
+
+      <div class="form-group">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-9">
+            {% if form.last_name.errors %}
+              <ul style="margin:0; padding:0;">
+              {% for error in form.last_name.errors %}
+                <li class="text-danger" style="list-style: none;">{{ error|escape }}</li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.last_name.id_for_label }}" class="col-sm-2
+        control-label">{% trans "Surname" %}</label>
+        <div class="col-sm-9">
+          <input type="text"
+                 class="form-control required"
+                 id="{{ form.last_name.id_for_label }}"
+                 name="{{ form.last_name.html_name }}"
+                 placeholder="{% trans "Surname" %}"
+                 value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}" />
         </div>
       </div>
 
@@ -129,7 +134,8 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="{{ form.bdate.id_for_label }}" class="col-sm-2 control-label">Дата рождения</label>
+        <label for="{{ form.bdate.id_for_label }}" class="col-sm-2
+        control-label">{% trans "Birthdate" %}</label>
         <div class="col-sm-5">
           <div data-profile-bdate class='input-group date'>
             <input data-profile-bdate
@@ -137,7 +143,7 @@
                    class="form-control required"
                    id="{{ form.bdate.id_for_label }}"
                    name="{{ form.bdate.html_name }}"
-                   placeholder="Дата рождения"
+                   placeholder="{% trans "Birthdate" %}"
                    value="{% if form.bdate.value %}{{ form.bdate.value }}{% endif %}" />
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
@@ -159,13 +165,14 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="{{ form.my_site.id_for_label }}" class="col-sm-2 control-label">Сайт</label>
+        <label for="{{ form.my_site.id_for_label }}" class="col-sm-2
+        control-label">{% trans "Site" %}</label>
         <div class="col-sm-9">
           <input type="text"
                  class="form-control required"
                  id="{{ form.my_site.id_for_label }}"
                  name="{{ form.my_site.html_name }}"
-                 placeholder="Сайт"
+                 placeholder="{% trans "Site" %}"
                  value="{% if form.my_site.value %}{{ form.my_site.value }}{% endif %}" />
         </div>
       </div>
@@ -183,7 +190,8 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="{{ form.description.id_for_label }}" class="col-sm-2 control-label">О себе</label>
+        <label for="{{ form.description.id_for_label }}" class="col-sm-2
+        control-label">{% trans "About me" %}</label>
         <div class="col-sm-9">
           <textarea rows="5"
                     class="form-control"
@@ -216,28 +224,6 @@
       <div class="form-group">
         <div class="col-sm-2"></div>
         <div class="col-sm-9">
-          {% if form.city.errors %}
-            <ul style="margin:0; padding:0;">
-            {% for error in form.city.errors %}
-              <li class="text-danger" style="list-style: none;">{{ error|escape }}</li>
-            {% endfor %}
-            </ul>
-          {% endif %}
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="{{ form.city.id_for_label }}" class="col-sm-2 control-label">Город</label>
-        <div class="col-sm-9">
-          <input type="text"
-                 class="form-control required"
-                 id="{{ form.city.id_for_label }}"
-                 name="{{ form.city.html_name }}"
-                 value="{% if form.city.value %}{{ form.city.value }}{% endif %}" />
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-9">
           {% if form.country.errors %}
             <ul style="margin:0; padding:0;">
             {% for error in form.country.errors %}
@@ -248,7 +234,8 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="{{ form.country.id_for_label }}" class="col-sm-2 control-label">Страна</label>
+        <label for="{{ form.country.id_for_label }}" class="col-sm-2
+        control-label">{% trans "Country" %}</label>
         <div class="col-sm-9">
           <input type="text"
                  class="form-control required"
@@ -260,9 +247,9 @@
       <div class="form-group">
         <div class="col-sm-2"></div>
         <div class="col-sm-9">
-          {% if form.university.errors %}
+          {% if form.city.errors %}
             <ul style="margin:0; padding:0;">
-            {% for error in form.university.errors %}
+            {% for error in form.city.errors %}
               <li class="text-danger" style="list-style: none;">{{ error|escape }}</li>
             {% endfor %}
             </ul>
@@ -270,49 +257,28 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="{{ form.university.id_for_label }}" class="col-sm-2 control-label">ВУЗ</label>
+        <label for="{{ form.city.id_for_label }}" class="col-sm-2
+        control-label">{% trans "City" %}</label>
         <div class="col-sm-9">
           <input type="text"
                  class="form-control required"
-                 id="{{ form.university.id_for_label }}"
-                 name="{{ form.university.html_name }}"
-                 value="{% if form.university.value %}{{ form.university.value }}{% endif %}" />
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-9">
-          {% if form.education_level.errors %}
-            <ul style="margin:0; padding:0;">
-            {% for error in form.education_level.errors %}
-              <li class="text-danger" style="list-style: none;">{{ error|escape }}</li>
-            {% endfor %}
-            </ul>
-          {% endif %}
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="{{ form.education_level.id_for_label }}" class="col-sm-2 control-label">Ученая степень</label>
-        <div class="col-sm-9">
-          <input type="text"
-                 class="form-control required"
-                 id="{{ form.education_level.id_for_label }}"
-                 name="{{ form.education_level.html_name }}"
-                 value="{% if form.education_level.value %}{{ form.education_level.value }}{% endif %}" />
-          <p class="text-info" style="font-size:10px;">{{ form.education_level.help_text }}</p>
+                 id="{{ form.city.id_for_label }}"
+                 name="{{ form.city.html_name }}"
+                 value="{% if form.city.value %}{{ form.city.value }}{% endif %}" />
         </div>
       </div>
       <div class="col-sm-2"></div>
       <div class="form-group">
         <div class="col-sm-9">
-          <input type="submit" class="btn btn-primary" value="Сохранить"/>
+          <input type="submit" class="btn btn-primary" value="
+          {% trans "Save" %}"/>
         </div>
       </div>
     </form>
   </div>
 
   <div class="col-sm-2">
-    <h4>Связать аккаунты:</h4>
+    <h4>{% trans "Link Accounts" %}:</h4>
     {% static "images/button_to_bind/" as img_social %}
     {% for sublist in available_backends|social_backends %}
       {% for name, backend in sublist %}
@@ -363,7 +329,7 @@
         readURL(this);
     });
 
-    $('input[type="file"]').attr('title', 'Поменять фото');
+    $('input[type="file"]').attr('title', '{% trans "Change photo" %}');
   })
   </script>
 {% endblock %}

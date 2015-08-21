@@ -1,1 +1,0 @@
-Для подтверждения почтового адреса на {{ site.name }} нажмите сюда: http://{{ site.domain }}{% url 'account:email-verify' verification_key %}

@@ -107,7 +107,7 @@ AUTH_USER_MODEL = 'account.Account'
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
@@ -187,7 +187,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.load_extra_data',
     'social.pipeline.user.user_details',
     'apps.account.pipeline.save_profile_picture_and_profile_url',
-    'apps.account.pipeline.associate_invitations_when_new_user',
+    # 'apps.account.pipeline.associate_invitations_when_new_user',
     'social.pipeline.debug.debug',
 )
 

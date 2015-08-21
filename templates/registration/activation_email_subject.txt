@@ -1,1 +1,2 @@
-Потверждение почты
+{% load i18n %}
+{% trans "Email confirmation" %}

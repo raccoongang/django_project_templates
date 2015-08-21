@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -38,7 +39,9 @@
           {% if user.is_authenticated %}
             <ul class="nav navbar-nav nav-pills">
               <li role="presentation" {% block active_profile %}{% endblock %}>
-                <a href="{% url 'account:index' %}">Личный кабинет</a>
+                <a href="{% url 'account:index' %}">
+                    {% trans "Personal Area" %}
+                </a>
               </li>
             </ul>
           {% endif %}
@@ -58,16 +61,16 @@
                   <ul class="dropdown-menu">
                     <li role="presentation">
                       <a href="{% url 'account:index' %}" role="button" aria-haspopup="true" aria-expanded="false">
-                        Личный кабинет</a>
+                        {% trans "Personal Area" %}</a>
                     </li>
                     <li role="presentation">
                       <a href="{% url 'account:profile-settings' %}" role="button" aria-haspopup="true" aria-expanded="false">
-                        Профиль
+                        {% trans "Profile Settings" %}
                       </a>
                     </li>
                     <li role="presentation">
                       <a href="{% url 'account:logout' %}" role="button" aria-haspopup="true" aria-expanded="false">
-                        Выйти
+                        {% trans "Logout" %}
                       </a>
                     </li>
                   </ul>
@@ -78,10 +81,10 @@
 
           {% if not user.is_authenticated %}
             <button data-modal-button-registration type="button" class="btn btn-primary" data-toggle="modal" data-target="#register_modal">
-              Регистрация
+              {% trans "Sign Up" %}
             </button>
             <button data-modal-button-login type="button" class="btn btn-success" data-toggle="modal" data-target="#login_modal">
-              Войти
+              {% trans "Sign In" %}
             </button>
           {% endif %}
           </div>
@@ -91,7 +94,6 @@
 {#                                            Block content#}
 
     <div class="container custom_container">
-    {% include 'account/message.html' %}
     <div class="panel panel-default">
     <div class="panel-body custom_shadow_for_panel-body">
 {#    <div class="col-sm-10">#}

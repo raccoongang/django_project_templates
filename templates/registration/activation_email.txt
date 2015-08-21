@@ -1,1 +1,3 @@
-Вы зарегистрировались на сайте {{ site.name }}. Для активации аккаунта пройдите по ссылке http://{{ site.domain }}{% url 'registration_activate' activation_key %}
+{% load i18n %}
+{% url 'registration_activate' activation_key as link %}
+{% blocktrans %}You have registrated on {{ site.name }}. Follow by link http://{{ site.domain }}{{ link }} for account activation" {% endblocktrans %}

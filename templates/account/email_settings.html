@@ -1,5 +1,5 @@
 {% extends 'account/base_settings.html' %}
-
+{% load i18n %}
 {% block settings_email_active %}class="active"{% endblock %}
 
 {% block settings_content %}
@@ -9,7 +9,7 @@
     <div class="form-group">
       <div class="col-sm-3"></div>
       <div class="col-sm-6 text-info">
-        Действующая почта — {{ user.email }}
+          {% trans "Current email" %} — {{ user.email }}
       </div>
     </div>
 
@@ -26,13 +26,14 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="{{ form.email.id_for_label }}" class="col-sm-3 control-label">Новая почта</label>
+      <label for="{{ form.email.id_for_label }}" class="col-sm-3
+      control-label">{% trans "New email" %}</label>
       <div class="col-sm-6">
         <input type="text"
                class="form-control required"
                id="{{ form.email.id_for_label }}"
                name="{{ form.email.html_name }}"
-               placeholder="Новая почта"
+               placeholder="{% trans "New email" %}"
                value="{% if form.email.value %}{{ form.email.value }}{% endif %}" />
       </div>
     </div>
@@ -40,7 +41,7 @@
       <div class="col-sm-3"></div>
       <div class="col-sm-6">
           <div class="text-info">
-            Мы вышлем письмо с подтверждением
+              {% trans "We will send you mail with confirmation" %}
           </div>
       </div>
     </div>
@@ -58,13 +59,14 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="{{ form.password.id_for_label }}" class="col-sm-3 control-label">Ваш пароль</label>
+      <label for="{{ form.password.id_for_label }}" class="col-sm-3
+      control-label">{% trans "Your password" %}</label>
       <div class="col-sm-6">
         <input type="password"
                class="form-control required"
                id="{{ form.password.id_for_label }}"
                name="{{ form.password.html_name }}"
-               placeholder="Ваш пароль"
+               placeholder="{% trans "Your password" %}"
                value="{% if form.password.value %}{{ form.password.value }}{% endif %}" />
       </div>
     </div>
@@ -73,7 +75,8 @@
     <div class="form-group">
       <div class="col-sm-3"></div>
       <div class="col-sm-9">
-        <input type="submit" class="btn btn-primary" value="Сохранить"/>
+        <input type="submit" class="btn btn-primary" value="
+        {% trans "Save" %}"/>
       </div>
     </div>
   </form>

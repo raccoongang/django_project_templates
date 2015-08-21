@@ -1,5 +1,5 @@
-# -*- coding: utf8 -*-
 from django import forms
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.hashers import is_password_usable
 from apps.account.models import Account
@@ -13,9 +13,6 @@ class ProfileForm(forms.ModelForm):
         model = Account
         fields = ['username', 'last_name', 'first_name', 'my_site', 'description', 'skype', 'city', 'country',
                   'university', 'education_level', 'bdate', 'avatar']
-        help_texts = {
-            'education_level': u'Например: бакалавр, магистр, аспирант...',
-        }
 
 class EmailChangeForm(forms.Form):
 
@@ -30,7 +27,7 @@ class EmailChangeForm(forms.Form):
         email = self.cleaned_data.get('email')
 
         if self.user.email == email:
-            raise forms.ValidationError(u'Новый адрес электронной почты не может быть такой же как ваш текущий адрес')
+            raise forms.ValidationError(_("New and current email addresses must not be the same"))
 
         return email
 
@@ -38,7 +35,7 @@ class EmailChangeForm(forms.Form):
         password = self.cleaned_data.get('password')
 
         if not self.user.check_password(password):
-            raise forms.ValidationError(u'Пароль не верный')
+            raise forms.ValidationError(_("Incorrect password"))
 
         return password
 
