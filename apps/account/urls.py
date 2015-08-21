@@ -4,7 +4,6 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^$', views.ProfileView.as_view(), name='index'),
     url(r'^activate/(?P<activation_key>\w+)/$', views.CustomActivationView.as_view(), name='registration_activate'),
     url(r'^logout/$', views.logout_view, name='logout'),
     url(r'^login/$', views.login, name='login'),

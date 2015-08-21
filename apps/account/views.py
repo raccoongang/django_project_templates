@@ -27,20 +27,6 @@ from apps.account.utils import generate_key
 from learnee.mixins import LoginRequiredMixin
 
 
-class ProfileView(LoginRequiredMixin, DetailView):
-    context_object_name = 'account'
-    template_name = 'account/profile.html'
-
-    def get_object(self):
-        return self.request.user
-
-    def get_context_data(self, **kwargs):
-        data = super(ProfileView, self).get_context_data(**kwargs)
-        full_url = ''.join(['http://', get_current_site(self.request).domain])
-        data.update({
-            'full_url': full_url,
-        })
-        return data
 
 
 def logout_view(request):

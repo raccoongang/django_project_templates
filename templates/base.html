@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Project Name</title>
+    <title>{{ PROJECT_NAME }}</title>
 
     <!-- Bootstrap -->
     <link href="{% static  'css/bootstrap.css' %}" rel="stylesheet">
@@ -32,19 +32,9 @@
           <div class="navbar-header">
             <a class="navbar-brand" href="{% url 'home' %}">
       {#        <img alt="Brand" src="...">#}
-              Project Name
+              {{ PROJECT_NAME }}
             </a>
           </div>
-
-          {% if user.is_authenticated %}
-            <ul class="nav navbar-nav nav-pills">
-              <li role="presentation" {% block active_profile %}{% endblock %}>
-                <a href="{% url 'account:index' %}">
-                    {% trans "Personal Area" %}
-                </a>
-              </li>
-            </ul>
-          {% endif %}
 
           <div class="navbar-form navbar-right">
             <ul class="nav navbar-nav nav-pills" style="margin: 0 50px 0 0;">
@@ -59,10 +49,6 @@
                   </a>
 
                   <ul class="dropdown-menu">
-                    <li role="presentation">
-                      <a href="{% url 'account:index' %}" role="button" aria-haspopup="true" aria-expanded="false">
-                        {% trans "Personal Area" %}</a>
-                    </li>
                     <li role="presentation">
                       <a href="{% url 'account:profile-settings' %}" role="button" aria-haspopup="true" aria-expanded="false">
                         {% trans "Profile Settings" %}
@@ -94,15 +80,11 @@
 {#                                            Block content#}
 
     <div class="container custom_container">
-    <div class="panel panel-default">
-    <div class="panel-body custom_shadow_for_panel-body">
-{#    <div class="col-sm-10">#}
-      {% block content %} {% endblock %}
-{#    </div>#}
+      <div class="panel panel-default">
+        <div class="panel-body custom_shadow_for_panel-body">
+          {% block content %} {% endblock %}
+        </div>
       </div>
-    </div>
-
-    </div>
     </div>
 
     <footer class="panel-footer">
@@ -121,7 +103,6 @@
     <script type="text/javascript" src="{% static 'select2-4.0.0/dist/js/i18n/ru.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap-switch.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/isotope.pkgd.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'tinymce/tinymce.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'bower_components/moment/min/moment.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -130,11 +111,6 @@
 
     <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/registration-login.js' %}"></script>
-    <script>
-      tinymce.init({
-              selector: "#mytextarea"
-          });
-    </script>
 
     {% block extend_script %}{% endblock %}
 
