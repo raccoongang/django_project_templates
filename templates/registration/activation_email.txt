@@ -1,3 +1,2 @@
-{% load i18n %}
-{% url 'registration_activate' activation_key as link %}
-{% blocktrans %}You have registrated on {{ site.name }}. Follow by link http://{{ site.domain }}{{ link }} for account activation" {% endblocktrans %}
+{% load i18n %}{% url 'registration_activate' activation_key  as link %}
+{% blocktrans with site_name=site.name site_domain=site.domain %}You have registrated on site {{ site_name }}. Follow link http://{{ site_domain }}{{ link }}" for account activation.{% endblocktrans %}

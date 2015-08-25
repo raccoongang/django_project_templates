@@ -4,7 +4,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.hashers import is_password_usable
 from django.contrib.sites.models import Site
 from django.contrib import messages
-from django.contrib.auth import (logout, login as auth_login, update_session_auth_hash)
+from django.contrib.auth import (logout, login as auth_login,
+                                 update_session_auth_hash)
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
@@ -16,17 +17,17 @@ from django.template.response import TemplateResponse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.generic import (TemplateView, UpdateView, FormView, RedirectView, DetailView, View)
+from django.views.generic import (TemplateView, UpdateView, FormView,
+                                  RedirectView, DetailView, View)
 
 from registration.backends.default.views import ActivationView
 from social.backends.utils import load_backends
 
-from apps.account.forms import ProfileForm, EmailChangeForm, CurrentPasswordChangeForm
+from apps.account.forms import ProfileForm, EmailChangeForm, \
+    CurrentPasswordChangeForm
 from apps.account.models import EmailChange, Account
 from apps.account.utils import generate_key
 from learnee.mixins import LoginRequiredMixin
-
-
 
 
 def logout_view(request):
@@ -50,7 +51,6 @@ def login(request, template_name='registration/login.html',
     if request.method == "POST":
         form = authentication_form(request, data=request.POST)
         if form.is_valid():
-
             # Okay, security check complete. Log the user in.
             auth_login(request, form.get_user())
 
@@ -102,9 +102,6 @@ def password_change(request,
     return TemplateResponse(request, template_name, context)
 
 
-
-
-
 class ProfileSettingsView(LoginRequiredMixin, UpdateView):
     form_class = ProfileForm
     success_url = reverse_lazy('account:profile-settings')
@@ -120,7 +117,8 @@ class ProfileSettingsView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         data = super(ProfileSettingsView, self).get_context_data(**kwargs)
-        data.update({'available_backends': load_backends(settings.AUTHENTICATION_BACKENDS)})
+        data.update({'available_backends': load_backends(
+            settings.AUTHENTICATION_BACKENDS)})
         return data
 
 
@@ -147,9 +145,9 @@ class EmailSettingsView(LoginRequiredMixin, FormView):
         # Clean all email change made by this user
         qs = EmailChange.objects.filter(user=self.request.user)
         qs.delete()
-        return EmailChange.objects.create(user = self.request.user,
-                                          verification_key = verification_key,
-                                          email = email)
+        return EmailChange.objects.create(user=self.request.user,
+                                          verification_key=verification_key,
+                                          email=email)
 
     def send_mail(self, email_change):
         current_site = Site.objects.get_current()
@@ -169,8 +167,11 @@ class EmailVerifyView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get(self, request, *args, **kwargs):
-        get_redirect = super(EmailVerifyView, self).get(request, *args, **kwargs)
-        email_change = get_object_or_404(EmailChange, verification_key=kwargs.get('verification_key'))
+        get_redirect = super(EmailVerifyView, self).get(request, *args,
+                                                        **kwargs)
+        email_change = get_object_or_404(EmailChange,
+                                         verification_key=kwargs.get(
+                                             'verification_key'))
 
         if request.user != email_change.user:
             raise Http404()
@@ -179,14 +180,15 @@ class EmailVerifyView(LoginRequiredMixin, RedirectView):
         request.user.email = email_change.email
         request.user.save()
         email_change.delete()
-        messages.success(self.request, _('Email successfuly changed to {0}.').format(request.user.email))
+        messages.success(self.request,
+                         _('Email successfuly changed to {0}.').format(
+                             request.user.email))
         return get_redirect
 
 
 class CustomActivationView(ActivationView):
-
     def get_success_url(self, request, user):
-        messages.success(request,_("You have activate your account"))
+        messages.success(request, _("You have activate your account"))
         return ('account:profile-settings', (), {})
 
 
@@ -211,7 +213,8 @@ def send_validation(strategy, backend, code):
     url = strategy.request.build_absolute_uri(url)
 
     subject = render_to_string('send_mail/send_validation_email_subject.txt')
-    message = render_to_string('send_mail/send_validation_activation_email.txt', context={'url': url})
+    message = render_to_string(
+        'send_mail/send_validation_activation_email.txt', context={'url': url})
     send_mail(subject, message, None, [code.email])
 
 

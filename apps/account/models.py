@@ -1,9 +1,6 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
-from friendship.models import Follow
-
-from tagging.registry import register
 
 
 class Account(AbstractUser):
@@ -33,12 +30,6 @@ class Account(AbstractUser):
         info = self.country or self.city or self.bdate
         return info
 
-    def followers_count(self):
-        return len(Follow.objects.followers(self))
-
-    def following_count(self):
-        return len(Follow.objects.following(self))
-
 
 class EmailChange(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
@@ -46,7 +37,8 @@ class EmailChange(models.Model):
     email = models.EmailField()
 
     def __unicode__(self):
-        return u'({}) {} --> {}'.format(self.user.username, self.user.email, self.email)
-
-
-register(Account)
+        return u'({}) {} --> {}'.format(
+            self.user.username,
+            self.user.email,
+            self.email
+        )

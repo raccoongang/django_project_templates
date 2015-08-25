@@ -1,0 +1,3 @@
+{% load i18n %}{% url 'account:email-verify' verification_key  as link %}
+{% blocktrans with site_name=site.name site_domain=site.domain %}Follow by link http://{{ site_domain }}{{ link }}" for email confirmation on {{ site_name }}. {% endblocktrans %}
+

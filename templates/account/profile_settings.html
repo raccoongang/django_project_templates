@@ -144,7 +144,7 @@
                    id="{{ form.bdate.id_for_label }}"
                    name="{{ form.bdate.html_name }}"
                    placeholder="{% trans "Birthdate" %}"
-                   value="{% if form.bdate.value %}{{ form.bdate.value }}{% endif %}" />
+                   value="{% if form.bdate.value %}{{ form.bdate.value|date:"d.m.Y" }}{% endif %}" />
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
@@ -309,7 +309,7 @@
   <script type="text/javascript">
   $(function () {
     $('[data-profile-bdate]').datetimepicker({
-      format: 'DD.MM.YYYY'
+      format: 'DD.MM.YYYY',
     });
 
     function readURL(input) {

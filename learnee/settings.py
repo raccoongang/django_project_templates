@@ -44,8 +44,6 @@ INSTALLED_APPS = (
     'registration',
     'bootstrap3',
     'debug_toolbar',
-    'friendship',
-    'tagging',
 
     'apps.account',
     'social.apps.django_app.default',

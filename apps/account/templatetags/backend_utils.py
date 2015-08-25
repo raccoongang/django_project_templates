@@ -1,5 +1,4 @@
 from django import template
-from friendship.models import Follow
 
 register = template.Library()
 
