@@ -1,5 +1,11 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
 {% load i18n %}
+
+{% block content %}
+    <div class="jumbotron">
+            <h1>{% trans "Sign Up" %}</h1>
+
 <form data-form-registration class="form-horizontal" method="post" action="{% url 'registration_register' %}">
   {% csrf_token %}
 
@@ -106,7 +112,14 @@
     </div>
   </div>
 
-  <input type="submit" class="hidden" />
+  <div class="form-group">
+      <div class="col-sm-12">
+          <button data-form-registration-submit type="submit" class="btn
+            btn-success pull-right">{% trans "Sign Up" %}</button>
+      </div>
+  </div>
+
+
 
   <div class="row">
     <div class="col-sm-3 text-right">
@@ -116,18 +129,16 @@
     <div class="col-sm-9">
       <div class="col-sm-5">
         <a data-social-url class="custom_img-thumbnail_link" href="{% url 'social:begin' 'facebook' %}">
-        <img class="img-thumbnail custom_img-thumbnail" src="{% static 'images/button/facebook_hor.png' %}" alt=""/>
+        <img class="img-thumbnail custom_img-thumbnail" src="{% static 'images/button/facebook-48x48-color.png' %}" alt=""/>
       </a>
       <a data-social-url class="custom_img-thumbnail_link" href="{% url 'social:begin' 'odnoklassniki-oauth2' %}">
-        <img class="img-thumbnail custom_img-thumbnail" src="{% static 'images/button/Odnoklassniki_hor.png' %}" alt=""/>
+        <img class="img-thumbnail custom_img-thumbnail" src="{% static 'images/button/Odnoklassniki-48x48-color.png' %}" alt=""/>
       </a>
-      </div>
-      <div class="=col-sm-5">
         <a data-social-url class="custom_img-thumbnail_link" href="{% url 'social:begin' 'vk-oauth2' %}">
-          <img class="img-thumbnail custom_img-thumbnail" src="{% static 'images/button/vkontakte_hor.png' %}" alt=""/>
+          <img class="img-thumbnail custom_img-thumbnail" src="{% static 'images/button/vkontakte-48x48-color.png' %}" alt=""/>
         </a>
         <a data-social-url class="custom_img-thumbnail_link" href="{% url 'social:begin' 'linkedin-oauth2' %}">
-          <img class="img-thumbnail custom_img-thumbnail" src="{% static 'images/button/Linkedin.png' %}" alt=""/>
+          <img class="img-thumbnail custom_img-thumbnail" src="{% static 'images/button/linkedin-48x48-color.png' %}" alt=""/>
         </a>
 
       </div>
@@ -135,3 +146,5 @@
 
   </div>
 </form>
+    </div>
+{% endblock %}

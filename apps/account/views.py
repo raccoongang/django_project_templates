@@ -19,8 +19,10 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import (TemplateView, UpdateView, FormView,
                                   RedirectView, DetailView, View)
-
-from registration.backends.default.views import ActivationView
+from django.utils.http import is_safe_url
+from django.shortcuts import resolve_url
+from registration.backends.default.views import ActivationView, \
+    RegistrationView
 from social.backends.utils import load_backends
 
 from apps.account.forms import ProfileForm, EmailChangeForm, \
@@ -47,14 +49,21 @@ def login(request, template_name='registration/login.html',
     """
     redirect_to = request.POST.get(redirect_field_name,
                                    request.GET.get(redirect_field_name, ''))
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(resolve_url(settings.LOGIN_REDIRECT_URL))
 
     if request.method == "POST":
         form = authentication_form(request, data=request.POST)
         if form.is_valid():
-            # Okay, security check complete. Log the user in.
-            auth_login(request, form.get_user())
+            # Ensure the user-originating redirection url is safe.
+            if not is_safe_url(url=redirect_to, host=request.get_host()):
+                redirect_to = resolve_url(settings.LOGIN_REDIRECT_URL)
 
-            return HttpResponse('')
+            # Okay, security check complete. Log the user in.
+            user = form.get_user()
+            auth_login(request, user)
+            messages.success(request, _("Welcome, {0}").format(user.username))
+            return HttpResponseRedirect(redirect_to)
     else:
         form = authentication_form(request)
 
@@ -188,8 +197,18 @@ class EmailVerifyView(LoginRequiredMixin, RedirectView):
 
 class CustomActivationView(ActivationView):
     def get_success_url(self, request, user):
-        messages.success(request, _("You have activate your account"))
+        messages.success(request, _("You have activated your account"))
         return ('account:profile-settings', (), {})
+
+
+class CustomRegistrationView(RegistrationView):
+    def get_success_url(self, request, user):
+        messages.success(
+            request,
+            _("""Registration successfuly finished.
+            Check you email for account actiavation""")
+        )
+        return ('home', (), {})
 
 
 class RequireEmailView(TemplateView):

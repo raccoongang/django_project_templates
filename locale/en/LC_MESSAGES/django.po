@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-21 16:20+0300\n"
+"POT-Creation-Date: 2015-09-10 13:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,33 +17,44 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/account/forms.py:30
-msgid "New and current email addresses should not overlap"
+#: apps/account/forms.py:34
+msgid "New and current email addresses must not be the same"
 msgstr ""
 
-#: apps/account/forms.py:38
+#: apps/account/forms.py:42
 msgid "Incorrect password"
 msgstr ""
 
-#: apps/account/views.py:108
+#: apps/account/views.py:65
+#, python-brace-format
+msgid "Welcome, {0}"
+msgstr ""
+
+#: apps/account/views.py:103
 msgid "Password has been changed"
 msgstr ""
 
-#: apps/account/views.py:136
+#: apps/account/views.py:124
 msgid "Profile has been saved"
 msgstr ""
 
-#: apps/account/views.py:182
+#: apps/account/views.py:171
 msgid "Check you email"
 msgstr ""
 
-#: apps/account/views.py:200
+#: apps/account/views.py:193
 #, python-brace-format
 msgid "Email successfuly changed to {0}."
 msgstr ""
 
-#: apps/account/views.py:207
-msgid "You have activate your account"
+#: apps/account/views.py:200
+msgid "You have activated your account"
+msgstr ""
+
+#: apps/account/views.py:208
+msgid ""
+"Registration successfuly finished.\n"
+"            Check you email for account actiavation"
 msgstr ""
 
 #: templates/account/base_settings.html:8
@@ -53,15 +64,15 @@ msgstr ""
 #: templates/account/base_settings.html:11
 #: templates/account/require_email.html:13
 #: templates/account/require_email.html:19
-#: templates/registration/registration_form.html:43
 #: templates/registration/registration_form.html:49
+#: templates/registration/registration_form.html:55
 msgid "Email"
 msgstr ""
 
 #: templates/account/base_settings.html:15
-#: templates/registration/login.html:49 templates/registration/login.html:56
-#: templates/registration/registration_form.html:74
+#: templates/registration/login.html:54 templates/registration/login.html:61
 #: templates/registration/registration_form.html:80
+#: templates/registration/registration_form.html:86
 msgid "Password"
 msgstr ""
 
@@ -94,45 +105,6 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: templates/account/modals/delete_user.html:14
-msgid "Do you realy want to delete"
-msgstr ""
-
-#: templates/account/modals/delete_user.html:22
-msgid "Cancel"
-msgstr ""
-
-#: templates/account/modals/delete_user.html:23
-msgid "Delete"
-msgstr ""
-
-#: templates/account/modals/login_modal.html:8
-#: templates/account/modals/login_modal.html:17 templates/base.html:87
-msgid "Sign In"
-msgstr ""
-
-#: templates/account/modals/login_modal.html:16
-#: templates/account/modals/register_modal.html:23
-msgid "Close"
-msgstr ""
-
-#: templates/account/modals/register_modal.html:11
-msgid "Registration"
-msgstr ""
-
-#: templates/account/modals/register_modal.html:25 templates/base.html:84
-msgid "Sign Up"
-msgstr ""
-
-#: templates/account/profile_main.html:21 templates/base.html:68
-msgid "Profile Settings"
-msgstr ""
-
-#: templates/account/profile_main.html:45
-#: templates/account/profile_main.html:48
-msgid "Search"
-msgstr ""
-
 #: templates/account/profile_settings.html:43
 #: templates/account/profile_settings.html:332
 msgid "Change photo"
@@ -140,9 +112,9 @@ msgstr ""
 
 #: templates/account/profile_settings.html:62
 #: templates/account/profile_settings.html:68
-#: templates/registration/login.html:21 templates/registration/login.html:28
-#: templates/registration/registration_form.html:18
+#: templates/registration/login.html:28 templates/registration/login.html:35
 #: templates/registration/registration_form.html:24
+#: templates/registration/registration_form.html:30
 msgid "Nickname"
 msgstr ""
 
@@ -186,38 +158,49 @@ msgstr ""
 msgid "Email is required"
 msgstr ""
 
-#: templates/base.html:43 templates/base.html.py:64
-msgid "Personal Area"
+#: templates/base.html:54
+msgid "Profile Settings"
 msgstr ""
 
-#: templates/base.html:73
+#: templates/base.html:59
 msgid "Logout"
+msgstr ""
+
+#: templates/base.html:69 templates/registration/registration_form.html:7
+#: templates/registration/registration_form.html:118
+msgid "Sign Up"
+msgstr ""
+
+#: templates/base.html:71 templates/registration/login.html:8
+#: templates/registration/login.html:74
+msgid "Sign In"
 msgstr ""
 
 #: templates/registration/activation_complete.html:7
 msgid "Your account successfuly activated"
 msgstr ""
 
-#: templates/registration/activation_email.txt:3
+#: templates/registration/activation_email.txt:2
 #, python-format
 msgid ""
-"You have registrated on %(site.name)s. Follow by link http://%(site.domain)s"
-"%(link)s for account activation\" "
+"You have registrated on site %(site_name)s. Follow link http://"
+"%(site_domain)s%(link)s\" for account activation."
 msgstr ""
 
-#: templates/registration/activation_email_subject.txt:2
+#: templates/registration/activation_email_subject.txt:1
+#: templates/send_mail/activation_email_subject.html:1
 msgid "Email confirmation"
 msgstr ""
 
-#: templates/registration/login.html:66
+#: templates/registration/login.html:68
 msgid "I have an account, but I have "
 msgstr ""
 
-#: templates/registration/login.html:68
+#: templates/registration/login.html:70
 msgid "forgot a password"
 msgstr ""
 
-#: templates/registration/login.html:75
+#: templates/registration/login.html:80
 msgid "Sign In With"
 msgstr ""
 
@@ -268,11 +251,18 @@ msgid ""
 "Registration successfuly finished. Check you email for account actiavation"
 msgstr ""
 
-#: templates/registration/registration_form.html:98
 #: templates/registration/registration_form.html:104
+#: templates/registration/registration_form.html:110
 msgid "Confirm Password"
 msgstr ""
 
-#: templates/registration/registration_form.html:113
+#: templates/registration/registration_form.html:126
 msgid "Sign Up With"
+msgstr ""
+
+#: templates/send_mail/activation_email.html:2
+#, python-format
+msgid ""
+"Follow by link http://%(site_domain)s%(link)s\" for email confirmation on "
+"%(site_name)s. "
 msgstr ""

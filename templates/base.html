@@ -66,12 +66,10 @@
             </ul>
 
           {% if not user.is_authenticated %}
-            <button data-modal-button-registration type="button" class="btn btn-primary" data-toggle="modal" data-target="#register_modal">
-              {% trans "Sign Up" %}
-            </button>
-            <button data-modal-button-login type="button" class="btn btn-success" data-toggle="modal" data-target="#login_modal">
+            <a class="btn btn-primary" href="{% url 'registration_register' %}">{% trans "Sign Up" %}</a>
+            <a class="btn btn-success" href="{% url 'account:login' %}?next={{ request.get_full_path }}">
               {% trans "Sign In" %}
-            </button>
+            </a>
           {% endif %}
           </div>
         </div>
@@ -93,12 +91,7 @@
         <p>© Company 2015</p>
       </div>
     </footer>
-    {% if not user.is_authenticated %}
-      {% include 'account/modals/login_modal.html' %}
-      {% include 'account/modals/register_modal.html' %}
-    {% endif %}
-    {% include 'account/modals/interest_modal.html' %}
-
+{#      {% include 'account/modals/register_modal.html' %}#}
     <script type="text/javascript" src="{% static 'js/jquery-1.11.3.js' %}"></script>
     <script type="text/javascript" src="{% static 'select2-4.0.0/dist/js/select2.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'select2-4.0.0/dist/js/i18n/ru.js' %}"></script>
