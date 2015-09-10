@@ -29,7 +29,7 @@ from account.forms import ProfileForm, EmailChangeForm, \
     CurrentPasswordChangeForm
 from account.models import EmailChange
 from account.utils import generate_key
-from project.mixins import LoginRequiredMixin
+from {{ project_name }}.mixins import LoginRequiredMixin
 
 
 def logout_view(request):
