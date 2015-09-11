@@ -3,8 +3,7 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from {{ project_name }}
-from project_name import views
+from {{ project_name }} import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
