@@ -1,6 +1,6 @@
-# Readme
+# Raccoongang's django application template
 This Django application template includes all following functional:
-* Authorization using email wituh confirmation or social networks (Facebook, LinkedIn, Odnoklassniki, Vkontakte)
+* Authorization using email with confirmation or social networks (Facebook, LinkedIn, Odnoklassniki, Vkontakte)
 * Authorization using email or social networks
 * Password recovering
 * Profile editor
@@ -27,3 +27,8 @@ Install all libraries from requirements
 cd <project_name>
 pip install -r requirements.txt
 ```
+
+Uncomment settings.local.py on .gitignore.
+
+Follow this instruction for getting social network's access keys:
+http://adw0rd.com/2013/2/27/django-social-auth/
