@@ -1,9 +1,12 @@
 __author__ = 'xahgmah'
 
 from django.test import TestCase, RequestFactory, Client
-from account.models import Account, EmailChange
 from django.core import mail
 from django.core.urlresolvers import reverse
+from django.contrib.auth.forms import AuthenticationForm
+from account.models import Account, EmailChange
+from account.forms import EmailChangeForm, ProfileForm, \
+    CurrentPasswordChangeForm, PasswordChangeForm
 
 
 class LogoutTestCase(TestCase):
@@ -19,8 +22,7 @@ class LogoutTestCase(TestCase):
     def test_logout(self):
         c = Client()
         c.login(username=self.username, password=self.password)
-        response = c.get(reverse('logout'))
-        self.assertEqual(response.status_code, 200)
+        response = c.get(reverse('account:logout'))
         self.assertNotIn('_auth_user_id', c.session)
 
     def tearDown(self):
@@ -37,9 +39,16 @@ class LoginTestCase(TestCase):
             self.password
         )
 
+    def test_show_form(self):
+        c = Client()
+        response = c.get(reverse('account:login'))
+        self.assertIn('form', response.context_data)
+        self.assertIsInstance(response.context_data['form'],
+                              AuthenticationForm)
+
     def test_login(self):
         c = Client()
-        response = c.post(reverse('login'), {
+        response = c.post(reverse('account:login'), {
             'username': self.username,
             'password': self.password,
         })
@@ -48,12 +57,23 @@ class LoginTestCase(TestCase):
 
     def test_wrong_user_login(self):
         c = Client()
-        response = c.post(reverse('login'), {
+        response = c.post(reverse('account:login'), {
             'username': 'wrong',
             'password': 'wrong'
         })
         self.assertEqual(response.status_code, 200)
         self.assertGreater(len(response.context_data['form'].errors), 0)
+
+    def test_try_login_with_authenticated_user(self):
+        c = Client()
+        c.login(username=self.username, password=self.password)
+        response = c.post(reverse('account:login'), {
+            'username': 'wrong',
+            'password': 'wrong'
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(
+            response.url.endswith(reverse('account:profile-settings')))
 
     def tearDown(self):
         self.user.delete()
@@ -70,6 +90,25 @@ class PasswordChangeTestCase(TestCase):
             self.password
         )
 
+    def test_show_form(self):
+        c = Client()
+        c.login(username=self.username, password=self.password)
+        response = c.get(reverse('account:password-settings'))
+        self.assertIn('form', response.context_data)
+        self.assertIsInstance(response.context_data['form'],
+                              CurrentPasswordChangeForm)
+
+    def test_wrong_old_password(self):
+        c = Client()
+        c.login(username=self.username, password=self.password)
+        response = c.post(reverse('account:password-settings'), {
+            'old_password': 'wrong',
+            'new_password1': self.new_passwrord,
+            'new_password2': self.new_passwrord
+        })
+        self.assertGreater(len(response.context_data['form'].errors), 0)
+
+
     def test_password_change(self):
         c = Client()
         c.login(username=self.username, password=self.password)
@@ -84,6 +123,7 @@ class PasswordChangeTestCase(TestCase):
 
     def tearDown(self):
         self.user.delete()
+
 
 class ProfileSettingsTestCase(TestCase):
     def setUp(self):
@@ -154,6 +194,24 @@ class EmailSettingsTestCase(TestCase):
         )
         mail.outbox = []
 
+    def test_change_with_wrong_password(self):
+        c = Client()
+        c.login(username=self.username, password=self.password)
+        response = c.post(reverse('account:email-settings'), {
+            'email': self.newemail,
+            'password': 'wrong',
+        })
+        self.assertGreater(len(response.context_data['form'].errors), 0)
+
+    def test_change_to_similar_email(self):
+        c = Client()
+        c.login(username=self.username, password=self.password)
+        response = c.post(reverse('account:email-settings'), {
+            'email': 'myemail@test.com',
+            'password': self.password,
+        })
+        self.assertGreater(len(response.context_data['form'].errors), 0)
+
     def test_password_change(self):
         c1 = Client()
         c1.login(username=self.username, password=self.password)
@@ -172,8 +230,25 @@ class EmailSettingsTestCase(TestCase):
         self.assertEqual(Account.objects.get(username='test').email,
                          self.newemail)
 
+    def test_wrong_user(self):
+        user = Account.objects.create_user('wrong', 'wrong@wro.ng', '123123')
+        c1 = Client()
+        c1.login(username='wrong', password='123123')
+        c1.post(reverse('account:email-settings'), {
+            'email': 'new@wro.ng',
+            'password': '123123',
+        })
+        emailchange = EmailChange.objects.get(user=user)
+        c2 = Client()
+        #Login as another user
+        c2.login(username=self.username, password=self.password)
+        response = c2.get(reverse('account:email-verify',
+                       args=(emailchange.verification_key,)))
+        self.assertEqual(response.status_code,404)
+
     def tearDown(self):
         self.user.delete()
+
 
 class SendValidationTestCase(TestCase):
     def setUp(self):
