@@ -46,7 +46,6 @@ INSTALLED_APPS = (
 
     'account',
     'social.apps.django_app.default',
-    'sorl.thumbnail',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -96,7 +95,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 'social.apps.django_app.context_processors.backends',
                 'social.apps.django_app.context_processors.login_redirect',
-                '{{ project_name }}.context_processors.project_name',
+                'account.context_processors.project_name',
             ),
         },
     },
