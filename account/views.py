@@ -10,20 +10,21 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse_lazy, reverse
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.template.response import TemplateResponse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.generic import (TemplateView, UpdateView, FormView,
+from django.views.generic import (View, TemplateView, UpdateView, FormView,
                                   RedirectView)
 from django.utils.http import is_safe_url
 from django.shortcuts import resolve_url
 from registration.backends.default.views import ActivationView, \
     RegistrationView
 from social.backends.utils import load_backends
+from social.apps.django_app.default.models import UserSocialAuth
 
 from account.forms import ProfileForm, EmailChangeForm, \
     CurrentPasswordChangeForm
@@ -239,3 +240,11 @@ def send_validation(strategy, backend, code):
 
 class EmailSentView(TemplateView):
     template_name = 'account/email_sent.html'
+
+
+class DeleteAssociationView(View):
+    def post(self, request):
+        association = get_object_or_404(UserSocialAuth, provider=request.POST.get('provider'), user_id=request.user.pk)
+        association.delete()
+        return HttpResponse({"result": 'ok'})
+

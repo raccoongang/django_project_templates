@@ -1,7 +1,9 @@
 from django import template
+import re
 
 register = template.Library()
 
+name_re = re.compile(r'([^O])Auth')
 
 @register.filter
 def social_backends(backends):
@@ -23,3 +25,41 @@ def associated(context, backend):
         except IndexError:
             pass
     return ''
+
+@register.filter
+def icon_name(name):
+    return {
+        'stackoverflow': 'stack-overflow',
+        'google-oauth': 'google',
+        'google-oauth2': 'google',
+        'google-openidconnect': 'google',
+        'yahoo-oauth': 'yahoo',
+        'facebook-app': 'facebook',
+        'email': 'envelope',
+        'vimeo': 'vimeo-square',
+        'linkedin-oauth2': 'linkedin',
+        'vk-oauth2': 'vk',
+        'live': 'windows',
+        'username': 'user',
+    }.get(name, name)
+
+@register.filter
+def legacy_backends(backends):
+    backends = [(name, backend) for name, backend in backends.items()
+                    if name in ['username', 'email']]
+    backends.sort(key=lambda b: b[0])
+    return backends
+
+
+@register.filter
+def backend_class(backend):
+    return backend.replace('-', ' ')
+
+@register.filter
+def backend_name(backend):
+    name = backend.__class__.__name__
+    name = name.replace('OAuth', ' OAuth')
+    name = name.replace('OpenId', ' OpenId')
+    name = name.replace('Sandbox', '')
+    name = name_re.sub(r'\1 Auth', name)
+    return name
