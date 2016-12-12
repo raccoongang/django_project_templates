@@ -247,4 +247,3 @@ class DeleteAssociationView(View):
         association = get_object_or_404(UserSocialAuth, provider=request.POST.get('provider'), user_id=request.user.pk)
         association.delete()
         return HttpResponse({"result": 'ok'})
-
