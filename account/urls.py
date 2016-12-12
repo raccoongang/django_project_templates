@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.contrib.auth.decorators import login_required
 
 from account import views
 
@@ -14,4 +15,5 @@ urlpatterns = [
     url(r'^settings/password/$', views.password_change, name='password-settings'),
     url(r'^require_email/(?P<backend>[^/]+)/$', views.RequireEmailView.as_view(), name='require_email'),
     url(r'^email_sent/$', views.EmailSentView.as_view(), name='email-sent'),
+    url(r'delete_association/$', login_required(views.DeleteAssociationView.as_view()), name='delete-association'),
 ]

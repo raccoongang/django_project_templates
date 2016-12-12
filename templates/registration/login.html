@@ -2,6 +2,14 @@
 
 {% load staticfiles %}
 {% load i18n %}
+{% load backend_utils %}
+
+{% block css %}
+{{ block.super }}
+    <link href="{% static 'bower_components/bootstrap-social/bootstrap-social.css' %}" rel="stylesheet" >
+    <link href="{% static 'bower_components/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" >
+{% endblock %}
+
 
 {% block content %}
     <div class="jumbotron">
@@ -81,30 +89,11 @@
                 </div>
 
                 <div class="col-sm-9">
-                        <a data-social-url class="custom_img-thumbnail_link"
-                           href="{% url 'social:begin' 'facebook' %}">
-                            <img class="img-thumbnail custom_img-thumbnail"
-                                 src="{% static 'images/button/facebook-48x48-color.png' %}"
-                                 alt=""/>
+                    {% for backend in backends.backends %}
+                        <a data-social-url class="custom_img-thumbnail_link btn btn-social-icon btn-{{ backend|backend_class }}" href="{% url 'social:begin' backend %}">
+                            <span class="fa fa-{{ backend|backend_class }}"></span>
                         </a>
-                        <a data-social-url class="custom_img-thumbnail_link"
-                           href="{% url 'social:begin' 'odnoklassniki-oauth2' %}">
-                            <img class="img-thumbnail custom_img-thumbnail"
-                                 src="{% static 'images/button/Odnoklassniki-48x48-color.png' %}"
-                                 alt=""/>
-                        </a>
-                        <a data-social-url class="custom_img-thumbnail_link"
-                           href="{% url 'social:begin' 'vk-oauth2' %}">
-                            <img class="img-thumbnail custom_img-thumbnail"
-                                 src="{% static 'images/button/vkontakte-48x48-color.png' %}"
-                                 alt=""/>
-                        </a>
-                        <a data-social-url class="custom_img-thumbnail_link"
-                           href="{% url 'social:begin' 'linkedin-oauth2' %}">
-                            <img class="img-thumbnail custom_img-thumbnail"
-                                 src="{% static 'images/button/linkedin-48x48-color.png' %}"
-                                 alt=""/>
-                        </a>
+                    {% endfor %}
                 </div>
             </div>
         </form>

@@ -6,6 +6,12 @@
 
 {% block settings_profile_active %}class="active"{% endblock %}
 
+{% block css %}
+{{ block.super }}
+    <link href="{% static 'bower_components/bootstrap-social/bootstrap-social.css' %}" rel="stylesheet" >
+    <link href="{% static 'bower_components/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" >
+{% endblock %}
+
 {% block settings_content %}
   <div class="col-sm-8">
     <form method="post" class="form-horizontal" enctype="multipart/form-data" >
@@ -277,31 +283,42 @@
     </form>
   </div>
 
-  <div class="col-sm-2">
-    <h4>{% trans "Link Accounts" %}:</h4>
-    {% static "images/button_to_bind/" as img_social %}
-    {% for sublist in available_backends|social_backends %}
-      {% for name, backend in sublist %}
-        {% associated backend %}
-        {% if association %}
-          <form method="POST" action="{% url "social:disconnect_individual" backend=association.provider association_id=association.id %}?next={{ request.path }}">
-            {% csrf_token %}
-          </form>
-          <a data-disconnect-social-account class="custom_img-thumbnail_link bound" href="#">
-            <img class="img-thumbnail custom_img-thumbnail"
-                 src="{{ img_social }}{{ name }}.png"
-                 alt="" />
-          </a>
-        {% else %}
-          <a class="custom_img-thumbnail_link" href="{% url 'social:begin' backend=name %}?next={{ request.path }}">
-            <img class="img-thumbnail custom_img-thumbnail grayscale"
-                 src="{{ img_social }}{{ name }}.png"
-                 alt="" />
-          </a>
-        {% endif %}
+
+  <div class="col-sm-4 social-buttons">
+    <div class="">
+      <!--"social-login social-login__profile">-->
+      <h4>{% trans "Link Accounts" %}:</h4>
+      {% static "images/button_to_bind/" as img_social %}
+      {% for sublist in available_backends|social_backends %}
+              {% for name, backend in sublist %}
+
+                      {% associated backend %}
+                      {% if association %}
+                        <form method="POST"
+                              action="{% url "social:disconnect_individual" backend=association.provider association_id=association.id %}?next={{ request.path }}">
+                          <a data-disconnect-social-account
+                             class="btn btn-block btn-social btn-sm btn-{{ name|backend_class }} social-login_link__active"
+                             data-provider={{ name }}
+                                     href="#">
+                            Delete {{ backend|backend_name }} association
+                            <span class="fa fa-{{ name|backend_class }}"></span>
+                          </a>
+
+                              {% csrf_token %}
+                        </form>
+
+                      {% else %}
+                          <a class="btn btn-block btn-social btn-sm btn-{{ name|backend_class }}" href="{% url 'social:begin' backend=name %}?next={{ request.path }}">
+                            {% trans "Login with" %} {{ backend|backend_name }}
+                            <span class="fa fa-{{ name|backend_class }}"></span>
+                          </a>
+                      {% endif %}
+
+              {% endfor %}
       {% endfor %}
-    {% endfor %}
+    </div>
   </div>
+
   <div class="col-sm-2"></div>
 {% endblock %}
 
@@ -332,4 +349,7 @@
     $('input[type="file"]').attr('title', '{% trans "Change photo" %}');
   })
   </script>
+
+  <script type="text/javascript" src="{% static 'js/social_associations.js' %}"></script>
+
 {% endblock %}

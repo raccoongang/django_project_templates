@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/{{ docs_version }}//ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(__file__, '..'))))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/{{ docs_version }}/howto/deployment/checklist/
@@ -46,6 +46,7 @@ INSTALLED_APPS = (
 
     'account',
     'social.apps.django_app.default',
+    'djangobower',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -87,7 +88,7 @@ TEMPLATES = [
             'context_processors': (
                 "django.contrib.auth.context_processors.auth",
                 "django.template.context_processors.debug",
-                "django.template.context_processors.request",
+                "django.core.context_processors.request",
                 "django.template.context_processors.i18n",
                 "django.template.context_processors.media",
                 "django.template.context_processors.static",
@@ -131,7 +132,7 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/accounts/'
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
-SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/accounts/settings/'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/accounts/'
 
 SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 
@@ -166,6 +167,8 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.vk.VKOAuth2',
     'social.backends.odnoklassniki.OdnoklassnikiOAuth2',
     'social.backends.linkedin.LinkedinOAuth2',
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.github.GithubOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -176,15 +179,15 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.auth_allowed',
     'social.pipeline.social_auth.social_user',
     'social.pipeline.user.get_username',
-    'apps.account.pipeline.require_email',
-    'apps.account.pipeline.mail_validation',
+    'account.pipeline.require_email',
+    'account.pipeline.mail_validation',
     'social.pipeline.social_auth.associate_by_email',
     'social.pipeline.user.create_user',
     'social.pipeline.social_auth.associate_user',
     # 'social.pipeline.debug.debug',
     'social.pipeline.social_auth.load_extra_data',
     'social.pipeline.user.user_details',
-    'apps.account.pipeline.save_profile_picture_and_profile_url',
+    'account.pipeline.save_profile_picture_and_profile_url',
     'social.pipeline.debug.debug',
 )
 
@@ -193,11 +196,32 @@ SOCIAL_AUTH_DISCONNECT_PIPELINE = (
     'social.pipeline.disconnect.get_entries',
     'social.pipeline.disconnect.revoke_tokens',
     'social.pipeline.disconnect.disconnect',
-    'apps.account.pipeline.disconnect',
+    'account.pipeline.disconnect',
 )
+
+BOWER_INSTALLED_APPS = (
+    'bootstrap#3.3.5',
+    'bootstrap-switch#3.3.2',
+    'https://github.com/malsup/form/archive/master.zip',
+    'jquery.validate',
+    'jquery#1.11.3',
+    'eonasdan-bootstrap-datetimepicker#4.17.42',
+    'moment#2.10.5',
+    'select2#4.0.0',
+    'bootstrap-social#5.1.1',
+    # 'bootstrap-theme',
+)
+
+BOWER_COMPONENTS_ROOT = STATICFILES_DIRS[0]
 
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = [
+    '--cover-package={{ project_name }}',
+    '--with-coverage',
+]
 
 try:
     from settings_local import *
